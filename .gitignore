@@ -4,3 +4,5 @@ target/generated-test-sources
 target/test-classes
 
 src/test/java/utils
+
+.idea
