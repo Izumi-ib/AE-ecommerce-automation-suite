@@ -6,14 +6,23 @@ import utils.ConfigReader;
 
 public class ApiClient {
 
-    public ApiClient(String baseUrl){
-        RestAssured.baseURI = baseUrl;
+    private String baseUri;
+
+    public ApiClient(String baseUri){
+        if (baseUri == null || baseUri.isEmpty()) {
+            throw new IllegalArgumentException("baseURI cannot be null or empty");
+        }
+        this.baseUri = baseUri;
     }
 
     public Response sendGetRequest(String endpoint) {
         return RestAssured.given()
+                .baseUri(baseUri)
                 .when()
-                .get(endpoint);
+                .get(endpoint)
+                .then()
+                .statusCode(200)
+                .extract().response();
     }
 
     public Response sendPostRequest(String endpoint, String body) {

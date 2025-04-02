@@ -1,6 +1,0 @@
-file:src/test/resources/features/ui/authentication/login_user.feature:9
-file:src/test/resources/features/ui/products_page/add_product_to_cart.feature:7
-file:src/test/resources/features/ui/authentication/logout_user.feature:8:19:27
-file:src/test/resources/features/ui/place_order/place_order.feature:7:32:55:100:136
-file:src/test/resources/features/ui/authentication/register_and_deletion_user.feature:11:21:30:44
-file:src/test/resources/features/ui/homepage/categories.feature:24

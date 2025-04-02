@@ -16,9 +16,9 @@ public class Login {
         signUpLoginPage.validateLoginFormTitle(expectedTitle);
     }
     @When("user enters email address {string} and password {string}")
-    public void user_enters_email_address_and_password(String email, String password) {
+    public void user_enters_email_address_and_password(String loginUserEmail, String password) {
         try {
-            signUpLoginPage.fillLoginForm(ConfigReader.readProperty(email), ConfigReader.readProperty(password));
+            signUpLoginPage.fillLoginForm(ConfigReader.readProperty(loginUserEmail), ConfigReader.readProperty(password));
             throw new IllegalArgumentException();
         } catch (IllegalArgumentException e) {
             System.out.println("Warning: IllegalArgumentException caught");

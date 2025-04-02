@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         features = "@target/uiReport/uiFailedTests.txt",
         glue = "stepDefinitions/ui",
         dryRun = false,
-        tags = "@category",
+        tags = "@ui",
         plugin = {"pretty","html:target/uiReport/uiReport.html", "rerun:target/uiReport/uiFailedTests.txt"})
 
 

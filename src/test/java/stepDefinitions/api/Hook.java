@@ -5,11 +5,11 @@ import utils.ConfigReader;
 
 public class Hook {
 
-    private ApiClient apiClient;
+    public static ApiClient apiClient;
 
     @Before("@api")
     public void setup(){
-        apiClient = new ApiClient(ConfigReader.readProperty("baseUrl"));
+        apiClient = new ApiClient("https://automationexercise.com/api");
     }
 
 

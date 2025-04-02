@@ -29,9 +29,9 @@ public class RegistrationAndDeletion {
         signUpLoginPage.validateNewUserFormTitle(expectedMessage);
     }
 
-    @When("user enters name and email and clicks Signup button")
-    public void user_enters_name_and_email_and_clicks_signup_button() {
-        signUpLoginPage.fillNewUserForm(ConfigReader.readProperty("username"), ConfigReader.readProperty("userEmail"));
+    @When("user enters name {string} and email {string} and clicks Signup button")
+    public void user_enters_name_and_email_and_clicks_signup_button(String name, String userEmail) {
+        signUpLoginPage.fillNewUserForm(ConfigReader.readProperty(name), ConfigReader.readProperty(userEmail));
         signUpLoginPage.clickSignUpButton();
     }
 

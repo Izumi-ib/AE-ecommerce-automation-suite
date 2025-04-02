@@ -10,11 +10,7 @@ Feature: User places an order
     Then user verifies the Cart Page is displayed
     When user proceeds to checkout
     And user clicks Register and Login button on the modal
-    And user enters name and email and clicks Signup button
-    And user fills in personal details 'Mr', 'name', 'email', password, '19/3/1989'
-    And user selects checkbox 'Sign up for our newsletter!' and checkbox 'Receive special offers from our partners!'
-    And user fills details 'Arlen', 'StraightSword', 'Birds', 'Address', 'Address2', 'United States', 'State', 'City', '12354', '465468454895600' And user clicks Create account button
-    Then user verifies account created 'ACCOUNT CREATED!' message
+    And user successfully registers
     And user clicks Continue button
     And user verifies 'Logged in as ' username is visible
     When user navigates to CartPage
@@ -24,18 +20,12 @@ Feature: User places an order
     And user enters payment details Name on Card 'ARLEN STRAIGHTSWORD', Card number '456445647895445', CVC '752', Expiration Date '02/32'
     And user confirms the payment
     Then user verifies order message 'Congratulations! Your order has been confirmed!' is visible
-    When user clicks Delete Account button
-    Then user verifies account deleted 'ACCOUNT DELETED!' message
-    When user clicks Continue button
+    When user successfully deletes the account
     Then user verifies that the Home page URL is correct
 
   Scenario: User registers before checkout
     When user clicks SignUpLogin button and navigates to the signup page
-    And user enters name and email and clicks Signup button
-    And user fills in personal details 'Mr', 'name', 'email', password, '19/3/1989'
-    And user selects checkbox 'Sign up for our newsletter!' and checkbox 'Receive special offers from our partners!'
-    And user fills details 'Arlen', 'StraightSword', 'Birds', 'Address', 'Address2', 'United States', 'State', 'City', '12354', '465468454895600' And user clicks Create account button
-    Then user verifies account created 'ACCOUNT CREATED!' message
+    And user successfully registers
     And user clicks Continue button
     And user verifies 'Logged in as ' username is visible
     When user hovers over product with index '5' and clicks the Add to Cart button
@@ -47,14 +37,12 @@ Feature: User places an order
     And user enters payment details Name on Card 'ARLEN STRAIGHTSWORD', Card number '456445647895445', CVC '752', Expiration Date '02/32'
     And user confirms the payment
     Then user verifies order message 'Congratulations! Your order has been confirmed!' is visible
-    When user clicks Delete Account button
-    And user verifies account deleted 'ACCOUNT DELETED!' message
-    When user clicks Continue button
+    When user successfully deletes the account
     Then user verifies that the Home page URL is correct
 
   Scenario: User logins before checkout
     When user clicks SignUpLogin button and navigates to the signup page
-    And user enters email address 'userEmail' and password 'password'
+    And user enters email address 'loginUserEmail' and password 'password'
     And user clicks login button
     Then user verifies 'Logged in as ' username is visible
     When user hovers over product with index '5' and clicks the Add to Cart button
@@ -66,15 +54,10 @@ Feature: User places an order
     And user enters payment details Name on Card 'ARLEN STRAIGHTSWORD', Card number '456445647895445', CVC '752', Expiration Date '02/32'
     And user confirms the payment
     Then user verifies order message 'Congratulations! Your order has been confirmed!' is visible
-    When user clicks Delete Account button
-    And user verifies account deleted 'ACCOUNT DELETED!' message
-    When user clicks Continue button
-    Then user verifies that the Home page URL is correct
 
-  @checkAddress
   Scenario Outline: User registers, proceeds to checkout, and verifies address consistency
     When user clicks SignUpLogin button and navigates to the signup page
-    And user enters name and email and clicks Signup button
+    And user enters name 'username' and email 'registerUserEmail' and clicks Signup button
     And user fills in personal details '<gender>', 'name', 'email', password, '19/3/1989'
     And user selects checkbox 'Sign up for our newsletter!' and checkbox 'Receive special offers from our partners!'
     And user fills details '<userName>', '<userSurname>', '<company>', '<address1>', '<address2>', '<country>', '<state>', '<city>', '<zipcode>', '<phoneNumber>' And user clicks Create account button
@@ -90,16 +73,13 @@ Feature: User places an order
     Then user verifies delivery address is same as registered '<gender> <userName> <userSurname>', '<company>', '<address1>', '<address2>', '<city> <state> <zipcode>', '<country>' '<phoneNumber>'
     And user verifies billing address is same as registered '<gender> <userName> <userSurname>', '<company>', '<address1>', '<address2>', '<city> <state> <zipcode>', '<country>' '<phoneNumber>'
 
-    When user clicks Delete Account button
-    And user verifies account deleted 'ACCOUNT DELETED!' message
-    When user clicks Continue button
+    When user successfully deletes the account
     Then user verifies that the Home page URL is correct
 
     Examples:
       | gender | userName | userSurname   | company | address1 | address2 | country       | state | city | zipcode | phoneNumber     |
       | Mr.    | Arlen    | StraightSword | Birds   | Address  | Address2 | United States | State | City | 12354   | 465468454895600 |
 
-  @a
   Scenario Outline: User adds a products, registers, pays for the order and downloads an invoice
     When user hovers over product with index '1' and clicks the Add to Cart button
     And user clicks View Cart button on the modal form
@@ -107,7 +87,7 @@ Feature: User places an order
     When user proceeds to checkout
 
     And user clicks Register and Login button on the modal
-    And user enters name and email and clicks Signup button
+    And user enters name 'username' and email 'registerUserEmail' and clicks Signup button
     And user fills in personal details '<gender>', 'name', 'email', password, '19/3/1989'
     And user selects checkbox 'Sign up for our newsletter!' and checkbox 'Receive special offers from our partners!'
     And user fills details 'Arlen', 'StraightSword', 'Birds', 'Address', 'Address2', 'United States', 'State', 'City', '12354', '465468454895600' And user clicks Create account button
