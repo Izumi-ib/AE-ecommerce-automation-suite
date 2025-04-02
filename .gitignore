@@ -1,7 +1,6 @@
 configuration.properties
 
-target/generated-test-sources
-target/test-classes
+target
 
 src/test/java/utils
 
