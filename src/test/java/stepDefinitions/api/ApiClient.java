@@ -1,6 +1,7 @@
 package stepDefinitions.api;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import utils.ConfigReader;
 
@@ -18,6 +19,7 @@ public class ApiClient {
     public Response sendGetRequest(String endpoint) {
         return RestAssured.given()
                 .baseUri(baseUri)
+                .accept(ContentType.JSON)
                 .when()
                 .get(endpoint)
                 .then()
@@ -27,10 +29,14 @@ public class ApiClient {
 
     public Response sendPostRequest(String endpoint, String body) {
         return RestAssured.given()
-                .header("Content-Type", "application/json")
+                .baseUri(baseUri)
+                .accept(ContentType.JSON)
                 .body(body)
                 .when()
-                .post(endpoint);
+                .post(endpoint)
+                .then()
+                .statusCode(200)
+                .extract().response();
     }
 
     public Response sendPutRequest(String endpoint, String body) {
