@@ -1,6 +1,6 @@
 configuration.properties
 
-target
+target/
 
 src/test/java/utils
 
