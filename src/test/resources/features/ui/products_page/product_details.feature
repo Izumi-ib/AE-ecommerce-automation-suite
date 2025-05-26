@@ -7,5 +7,5 @@ Feature: Product listing and details verification
     When user navigates to Products page
     Then user verifies products section title 'ALL PRODUCTS' is visible
     And user verifies products list is visible
-    When user clicks on View Product for the product, product index '0'
-    Then user verifies product index '0' details are visible on the Product Page
+    When user clicks on View Product for the product, product index '1'
+    Then user verifies product index '1' details are visible on the Product Page

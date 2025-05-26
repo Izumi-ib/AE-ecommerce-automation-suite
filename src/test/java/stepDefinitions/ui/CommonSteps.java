@@ -1,6 +1,7 @@
 package stepDefinitions.ui;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import pages.CommonMethods;
@@ -57,5 +58,11 @@ public class CommonSteps {
 
         accountCreatedStatusPage.clickContinueButton();
     }
+
+    @Then("user should see browser alert and validate the message {string}")
+    public void user_should_see_browser_alert_and_validate_the_message(String expectedMessage) {
+        commonMethods.validateFormSubmitErrorAlert(expectedMessage);
+    }
+
 
 }

@@ -18,7 +18,6 @@ import java.util.NoSuchElementException;
 
 public class CartPage {
     WebDriver driver = DriverHelper.getDriver();
-
     Actions actions = new Actions(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -44,20 +43,22 @@ public class CartPage {
     List<WebElement> removeProductButtonsList;
     @FindBy(css = "td.cart_description h4")
     List<WebElement> productsTitleList;
+    @FindBy(css = "#empty_cart p")
+    WebElement emptyCartMessage;
 
     public void verifyTheNumberOfAddedProducts(int expectedNum) {
         Assert.assertEquals(expectedNum, productsList.size());
     }
 
-    public void verifyProductsDetails() {
-        List<String> expectedProductsPriceList = Arrays.asList("Rs. 500", "Rs. 400");
-        List<String> expectedProductsQuantityList = Arrays.asList("1", "1");
-        List<String> expectedProductTotalPriceList = Arrays.asList("Rs. 500", "Rs. 400");
+    public void verifyProductsDetails(String prices, String quantities, String totalPrices) {
+        String[] expectedProductsPriceList = prices.split(",");
+        String[] expectedProductsQuantityList = quantities.split(",");
+        String[] expectedProductTotalPriceList = totalPrices.split(",");
 
         for (int i = 0; i < productsList.size(); i++) {
-            Assert.assertEquals(expectedProductsPriceList.get(i), productsPriceList.get(i).getText());
-            Assert.assertEquals(expectedProductsQuantityList.get(i), productsQuantityList.get(i).getText());
-            Assert.assertEquals(expectedProductTotalPriceList.get(i), productsTotalPrice.get(i).getText());
+            Assert.assertEquals(expectedProductsPriceList[i].trim(), productsPriceList.get(i).getText());
+            Assert.assertEquals(expectedProductsQuantityList[i].trim(), productsQuantityList.get(i).getText());
+            Assert.assertEquals(expectedProductTotalPriceList[i].trim(), productsTotalPrice.get(i).getText());
         }
     }
 
@@ -89,7 +90,7 @@ public class CartPage {
 
         for (WebElement link : removeProductButtonsList) {
             if (link.getAttribute("data-product-id").equals(productId)) {
-                link.click();
+                actions.moveToElement(link).click().perform();
                 isProductFound = true;
                 break;
             }
@@ -125,6 +126,11 @@ public class CartPage {
         }
 
         Assert.assertEquals(actualId, expectedIDS);
+    }
+
+    public void validateCartEmptyMessage(String expectedMessage){
+        wait.until(ExpectedConditions.visibilityOf(emptyCartMessage));
+        Assert.assertTrue("Empty cart message has failed", emptyCartMessage.getText().contains(expectedMessage));
     }
 
 }

@@ -16,3 +16,19 @@ Feature: User removes products from cart
     And user removes product index '5' from cart
     Then user verifies products length '1' are removed from the cart
 
+  Scenario: User removes one product and verifies that product is removed from the cart
+    When user hovers over product with index '1' and clicks the Add to Cart button
+    And user clicks View Cart button on the modal form
+    When user removes product index '1' from cart
+    Then user should see cart is empty message 'Cart is empty!'
+
+  Scenario Outline: User removes multiple products and verifies that products are removed from the cart
+    When user hovers over product with index '<products>' and clicks the Add to Cart button
+    And user clicks View Cart button on the modal form
+    When user removes product index '<removalProducts>' from cart
+    Then user verifies products length '<expectedLength>' are removed from the cart
+
+    Examples:
+      | products | removalProducts | expectedLength |
+      | 1,2      | 1               | 1              |
+#      | 2,3,5,6  |

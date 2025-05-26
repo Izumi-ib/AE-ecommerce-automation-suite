@@ -28,6 +28,8 @@ public class CategoriesPage {
     List<WebElement> categoriesList;
     @FindBy(xpath = "//div[@class='col-sm-9 padding-right']/div/h2")
     WebElement sectionSubcategoryTitle;
+    @FindBy(xpath = "//div[@class='panel-body']//a")
+    List<WebElement> subcategoriesList;
 
 
     public void selectCategory(String categoryName) {
@@ -43,17 +45,15 @@ public class CategoriesPage {
     }
 
     public void selectSubcategory(String subcategoryName) {
-        List<WebElement> subcategoriesList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='panel-body']//a")));
-        subcategoriesList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='panel-body']//a")));
-        subcategoriesList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='panel-body']//a")));
-
         for (WebElement subcategory : subcategoriesList) {
-
-            if (subcategory.isDisplayed() && subcategory.getText().equalsIgnoreCase(subcategoryName)) {
+            if (subcategory.getText().equalsIgnoreCase(subcategoryName)) {
                 subcategory.click();
                 return;
             }
         }
+
+        subcategoriesList = driver.findElements(By.xpath("//div[@class='panel-body']//a"));
+
         throw new NoSuchElementException("Subcategory '" + subcategoryName + "' not found!");
     }
 

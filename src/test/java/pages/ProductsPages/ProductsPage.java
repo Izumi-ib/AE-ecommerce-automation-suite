@@ -70,8 +70,7 @@ public class ProductsPage {
         }
     }
 
-    public void viewProduct(WebDriver driver, int productIndex) {
-        Actions actions = new Actions(driver);
+    public void viewProduct(int productIndex) {
         actions.moveToElement(productViewProductButtonsList.get(productIndex)).scrollByAmount(200, 200).perform();
 
         productViewProductButtonsList.get(productIndex).click();
@@ -89,11 +88,12 @@ public class ProductsPage {
         Assert.assertTrue(searchedProductsSectionTitle.isDisplayed() && searchedProductsSectionTitle.getText().equals(expectedTitle));
     }
 
-    public void addProductToCart(int productIndex) {
-        actions.moveToElement(productViewProductButtonsList.get(productIndex)).perform();
-        actions.clickAndHold(productItemsList.get(productIndex)).perform();
+    public void addProductToCart(int index) {
 
-        wait.until(ExpectedConditions.elementToBeClickable(productAddToCartButtonsList.get(productIndex))).click();
+        actions.moveToElement(productViewProductButtonsList.get(index)).perform();
+        actions.clickAndHold(productItemsList.get(index)).perform();
+
+        wait.until(ExpectedConditions.elementToBeClickable(productAddToCartButtonsList.get(index))).click();
     }
 
     public void clickContinueShoppingButton() {

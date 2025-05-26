@@ -42,10 +42,7 @@ public class RegisterUserPage {
     WebElement countrySelect;
     @FindBy(xpath = "//button[contains(text(), 'Create')]")
     WebElement createAccountButton;
-
-
     // 1 RegisterUser
-
     public void validateAccountInfoTitle(String expectedMessage) {
         if (accountInformationTitle.isDisplayed())
             Assert.assertEquals(expectedMessage, accountInformationTitle.getText().trim());
@@ -79,7 +76,6 @@ public class RegisterUserPage {
 
         passwordInput.sendKeys(ConfigReader.readProperty("password"));
     }
-
 
     public void chooseDateAndClickCheckboxes(String dateOfBirth) {
         String[] splitDate = dateOfBirth.split("/");
@@ -116,6 +112,9 @@ public class RegisterUserPage {
 
         createAccountButton.submit();
     }
+
+
+
 
 
 }

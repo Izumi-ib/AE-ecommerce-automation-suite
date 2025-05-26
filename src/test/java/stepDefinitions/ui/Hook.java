@@ -7,7 +7,6 @@ import utils.ConfigReader;
 import utils.DriverHelper;
 
 public class Hook {
-
     WebDriver driver = DriverHelper.getDriver();
     @Before("@ui")
     public void setup(){

@@ -31,12 +31,12 @@ public class product_details {
 
     @When("user clicks on View Product for the product, product index {string}")
     public void user_clicks_on_view_product_for_the_first_product(String i) {
-        productsPage.viewProduct(driver, Integer.parseInt(i));
+        productsPage.viewProduct(Integer.parseInt(i) - 1);
     }
 
     @Then("user verifies product index {string} details are visible on the Product Page")
     public void user_verifies_product_index_details_are_visible_on_the_Product_Page(String productIndex) {
-        productPage.verifyUserInProductPage(driver.getCurrentUrl(), Integer.parseInt(productIndex));
+        productPage.verifyUserInProductPage(driver.getCurrentUrl(), Integer.parseInt(productIndex) - 1);
         productPage.verifyProductDetailsVisible();
     }
 
